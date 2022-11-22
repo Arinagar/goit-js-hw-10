@@ -23,10 +23,7 @@ function onInputChange(event) {
           );
           divEl.innerHTML = '';
           ulEl.innerHTML = '';
-
-          return;
         } else if (data.length > 1) {
-          console.log('Hello');
           markup = data.map(el => {
             return `<li><img src='${el.flags.svg}' width='30' />${el.name.official}</li>`;
           });
@@ -38,8 +35,10 @@ function onInputChange(event) {
         }
       })
       .catch(err => {
-        Notiflix.Notify.failure('Oops, there is no country with that name');
         inputEl.value = '';
+        ulEl.innerHTML = '';
+        divEl.innerHTML = '';
+        Notiflix.Notify.failure('Oops, there is no country with that name');
       });
   }
 }
