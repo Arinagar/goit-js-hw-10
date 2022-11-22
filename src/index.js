@@ -16,6 +16,7 @@ function onInputChange(event) {
   if (searchQuery) {
     fetchCountries(searchQuery)
       .then(data => {
+        console.log(data);
         let markup;
         if (data.length > 10) {
           Notiflix.Notify.info(
@@ -24,11 +25,13 @@ function onInputChange(event) {
           divEl.innerHTML = '';
           ulEl.innerHTML = '';
         } else if (data.length > 1) {
-          markup = data.map(el => {
-            return `<li><img src='${el.flags.svg}' width='30' />${el.name.official}</li>`;
-          });
+          ulEl.innerHTML = listTemplate(data);
+          console.log(ulEl);
+          // markup = data.map(el => {
+          //   return `<li><img src='${el.flags.svg}' width='30' />${el.name.official}</li>`;
+          // });
+          // ulEl.innerHTML = markup.join('');
           divEl.innerHTML = '';
-          ulEl.innerHTML = markup.join('');
         } else {
           ulEl.innerHTML = '';
           divEl.innerHTML = divTemplate(data[0]);
